@@ -1,20 +1,21 @@
-import json from 'rollup-plugin-json';
-import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import pkg from './package.json';
+import vue from 'rollup-plugin-vue';
+import commonjs from 'rollup-plugin-commonjs';
 
+const input = "src/grid.vue";
 export default [
-  // UMD (for Browser) build
+  // UMD build for Browser
   {
-    input: 'src/main.js',
+    input: input,
     output: {
       name: pkg.name,
       file: pkg.browser,
       format: 'umd'
     },
     plugins: [
-      json(),
-      resolve(),
+      commonjs(),
+      vue(),
       babel({
         exclude: 'node_modules/**',
         babelrc: false,
@@ -23,17 +24,17 @@ export default [
     ]
   },
 
-  // CommonJS (for Node) and ES module (for bundlers) build.
+  // CommonJS build for Node.
+  // And ES module build for bundlers.
   {
-    input: 'src/main.js',
-    //external: ['ms'],
+    input: input,
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' }
     ],
     plugins: [
-      json(),
-      resolve(),
+      commonjs(),
+      vue(),
       babel({ exclude: 'node_modules/**' })
     ]
   }
