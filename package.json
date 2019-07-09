@@ -1,0 +1,44 @@
+{
+  "name": "simter-vue-grid",
+  "version": "0.1.0",
+  "description": "A vue grid with fixed header, group header, cross line merge cell features.",
+  "main": "dist/simter-vue-grid.cjs.js",
+  "module": "dist/simter-vue-grid.esm.js",
+  "browser": "dist/simter-vue-grid.umd.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "rollup": "^1.16.7",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
+  "scripts": {
+    "clean": "rm -rf dist && rm -rf temp",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/test.js",
+    "pretest": "npm run build"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "keywords": [
+    "simter",
+    "vue",
+    "grid",
+    "rollup"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simter-vue/simter-vue-grid.git"
+  },
+  "author": "RJ.Hwang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simter-vue/simter-vue-grid/issues"
+  },
+  "homepage": "https://github.com/simter-vue/simter-vue-grid"
+}
