@@ -15,14 +15,16 @@
     "rollup-plugin-json": "~4.0.0",
     "rollup-plugin-node-resolve": "~5.2.0",
     "rollup-plugin-vue": "~5.0.1",
+    "uglify-es": "~3.3.9",
     "vue-template-compiler": "~2.6.10"
   },
   "scripts": {
     "clean": "rm -rf dist && rm -rf temp",
-    "build": "rollup -c",
+    "build": "yarn clean && rollup -c && yarn min-js",
     "dev": "rollup -c -w",
     "test": "node test/test.js",
-    "pretest": "npm run build"
+    "min-js": "uglifyjs --comments /^!/ dist/simter-vue-grid.umd.js -o dist/simter-vue-grid.umd.min.js --source-map=url",
+    "pretest": "yarn build"
   },
   "files": [
     "src",
