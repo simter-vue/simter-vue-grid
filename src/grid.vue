@@ -1,8 +1,8 @@
 <template>
-<div>
-  <div>{{ columns }}</div>
-  <div>{{ rows }}</div>
-</div>
+  <div class="st-grid">
+    <div class="header">{{ columns }}</div>
+    <div class="content">{{ rows }}</div>
+  </div>
 </template>
 
 <script>
@@ -26,3 +26,17 @@ export default {
   }
 };
 </script>
+
+<style>
+.st-grid {
+  display: flex;
+  flex-direction: column;
+}
+.st-grid > * {
+  flex: none;
+}
+.st-grid > .content {
+  flex: 1 1 0%;
+  overflow: auto;
+}
+</style>
