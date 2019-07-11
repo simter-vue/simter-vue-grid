@@ -26,7 +26,6 @@
 </template>
 
 <script>
-const test = (debug = false) => debug;
 import flatten from "./flatten";
 
 export default {
@@ -39,11 +38,6 @@ export default {
         return [];
       }
     }
-  },
-  data() {
-    return {
-      debug: test()
-    };
   },
   computed: {
     flattenColumns() {
@@ -67,7 +61,5 @@ export default {
 .st-grid > .content {
   flex: 1 1 0%;
   overflow: auto;
-}
-.st-grid > .content > table {
 }
 </style>
