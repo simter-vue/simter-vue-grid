@@ -1,6 +1,6 @@
 <template>
   <div class="st-grid">
-    <div class="header">{{ columns }}</div>
+    <div class="header">TODO: header</div>
     <div class="content">
       <table border="1">
         <tbody>
@@ -10,6 +10,7 @@
         </tbody>
       </table>
     </div>
+    <div class="footer">TODO: footer</div>
   </div>
 </template>
 
