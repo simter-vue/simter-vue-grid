@@ -1,21 +1,47 @@
 // A functional component for renderer tr element.
 import tr from './tr.vue';
 
-function getCellValue(row, column, index) {
-  return column.pid ? (row[column.pid] && row[column.pid].length > index ? row[column.pid][index][column.id] : '') : row[column.id]
+/**
+ * [localRow, rowIndex, cellValue].
+ * 
+ * If column has a pid, then: 
+ *   1. return `[row[column.pid][subRowIndex], subRowIndex, row[column.pid][subRowIndex][column.id]]`
+ *      if row[column.pid].length > subRowIndex,
+ *   2. or return [undefined, undefined, undefined]
+ *      if row[column.pid].length <= subRowIndex.
+ * Otherwise return `[row, mainRowIndex, row[column.id]]`.
+ * 
+ * @param {Object} row 
+ * @param {Object} column 
+ * @param {Number} index 
+ */
+function getCellConfigInfo(row, column, subRowIndex, mainRowIndex) {
+  return column.pid
+    ? (row[column.pid] && row[column.pid].length > subRowIndex
+      ? [row[column.pid][subRowIndex], subRowIndex, row[column.pid][subRowIndex][column.id]]
+      : [undefined, undefined, undefined])
+    : [row, mainRowIndex, row[column.id]]
 }
 
 export default {
   functional: true,
   props: {
+    /** The row's data */
     row: {
       required: true,
       type: Object
     },
+    /** The row's index */
+    index: {
+      required: true,
+      type: Number
+    },
+    /** The row's first tr columns */
     columns: {
       required: true,
       type: Array
     },
+    /** The row's tr columns exclude first tr */
     subColumns: {
       required: false,
       type: Array,
@@ -30,12 +56,15 @@ export default {
     trs.push(createElement(tr, {
       props: {
         row: row,
+        index: context.props.index,
         cells: context.props.columns.map(column => {
-          // { rowspan, colspan, value, column}
+          let [localRow, rowIndex, cellValue] = getCellConfigInfo(row, column, 0, context.props.index)
           return {
-            column: column,
             rowspan: column.pid ? 1 : row.rowspan,
-            value: getCellValue(row, column, 0)
+            column: column,
+            value: cellValue,
+            row: localRow,
+            rowIndex: rowIndex
           }
         })
       }
@@ -47,11 +76,14 @@ export default {
       trs.push(createElement(tr, {
         props: {
           row: row,
-          cells: context.props.subColumns.map((column, index) => {
-            // { rowspan, colspan, value, column}
+          index: context.props.index,
+          cells: context.props.subColumns.map(column => {
+            let [localRow, rowIndex, cellValue] = getCellConfigInfo(row, column, i)
             return {
               column: column,
-              value: getCellValue(row, column, i)
+              value: cellValue,
+              row: localRow,
+              rowIndex: rowIndex
             }
           })
         }
@@ -59,5 +91,5 @@ export default {
     }
 
     return trs
-  },
+  }
 };

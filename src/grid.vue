@@ -5,7 +5,13 @@
       <table border="1">
         <tbody>
           <template v-for="(row, index) in rows">
-            <st-row :key="index" :row="row" :columns="flattenColumns" :sub-columns="subColumns"></st-row>
+            <st-row
+              :key="index"
+              :row="row"
+              :index="index"
+              :columns="flattenColumns"
+              :sub-columns="subColumns"
+            ></st-row>
           </template>
         </tbody>
       </table>
