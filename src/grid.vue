@@ -1,8 +1,14 @@
 <template>
   <div class="st-grid">
-    <div class="header">TODO: header</div>
+    <div class="header">
+      <table border="1">
+        <st-colgroup :columns="columns"></st-colgroup>
+        <st-thead :columns="columns"></st-thead>
+      </table>
+    </div>
     <div class="content">
       <table border="1">
+        <st-colgroup :columns="columns"></st-colgroup>
         <tbody>
           <template v-for="(row, index) in rows">
             <st-row
@@ -22,10 +28,12 @@
 
 <script>
 import flatten from "./utils/flatten";
-import row from "./row/row";
+import stRow from "./row/row";
+import stColgroup from "simter-vue-colgroup";
+import stThead from "simter-vue-thead";
 
 export default {
-  components: { "st-row": row },
+  components: { stColgroup, stThead, stRow },
   props: {
     columns: { type: Array, required: true },
     rows: {
@@ -58,5 +66,8 @@ export default {
 .st-grid > .content {
   flex: 1 1 0%;
   overflow: auto;
+}
+.st-grid > .content > table, .st-grid > .header > table {
+  width: 100%;
 }
 </style>
