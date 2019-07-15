@@ -24,14 +24,14 @@ $ yarn build
 **UI :**
 
 <table border=1>
-  <!-- 列宽控制 -->
+  <!-- controll column with -->
   <colgroup></colgroup>
-  <!-- 列头 -->
+  <!-- header -->
   <thead>
     <tr><th rowspan=2>No.</th><th rowspan=2>Name</th><th colspan=2 style="text-align:center">Items</th></tr>
     <tr><th>No.</th><th>Name</th></tr>
   </thead>
-  <!-- 内容 -->
+  <!-- content -->
   <tbody>
     <tr><td>1</td><td>Main 1</td><td></td><td></td></tr>
     <tr><td rowspan=2>2</td><td rowspan=2>Main 2</td><td>1</td><td>Sub 2-1</td></tr>
@@ -50,28 +50,29 @@ $ yarn build
 
 ```js
 columns = [
-  { id: "sn", label: "No."},
-  { id: "name", label: "Name"},
+  { id: "id", label: "Company Id"},
   { 
-    id: "items", 
+    label: "Partners", 
     children: [
-      { id: "sn", label: "No."},
-      { id: "name", label: "Name"},
+      { id: "name", label: "Company Name"},
+      // sub rows: pid represents this row is a sub row
+      { pid: "partners", id: "id", label: "Partner Id"},
+      { pid: "partners", id: "name", label: "Partner Name"}
     ]
   }
 ]
 
 rows = [
-  { sn: 1, name: "Main 1"},
+  { id: "google", name: "Google"},
   { 
-    sn: 2, 
-    name: "Main 2", 
-    items: [
-      { sn: 1, name: "Sub 1-1"},
-      { sn: 2, name: "Sub 1-2"},
+    id: "bing", 
+    name: "Bing", 
+    partners: [
+      { id: "P1", name: "John"},
+      { id: "P2", name: "Future"},
     ] 
   },
-  { sn: 3, name: "Main 3", items: [{ sn: 1, name: "Sub 3-1"}] }
+  { id: "baidu", name: "Baidu", partners: [{ id: "P3", name: "Music"}] }
 ]
 ```
 

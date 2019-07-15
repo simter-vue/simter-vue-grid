@@ -31,52 +31,65 @@ export default {
       customHeight: false,
       heightValue: 8,
       columns: [
-        { id: "sn", label: "No." },
-        { id: "name" },
+        { label: "SN", cell: "st-cell-sn" },       // test st-cell-sn (global)
+        { label: "Index", cell: "st-cell-index" }, // test st-cell-index
+        { id: "id", label: "ID" },                 // test st-cell-text (default)
+        { id: "name", label: "Name" },             // test st-cell-text (default)
+        { id: "website", label: "Website" },       // test st-cell-text (default)
+        {                                          // test st-cell-fn
+          label: "Link",
+          cell: {
+            component: "st-cell-fn",
+            fn(row, rowIndex) {
+              return row.website ? `<a href="https://${row.website}">Go</a>`: "";
+            },
+            isHtml: true
+          }
+        },
         {
-          id: "items1",
+          label: "Partners",
           children: [
-            { pid: "items1", id: "sn", label: "No." },
-            { pid: "items1", id: "name", label: "Name" }
+            { label: "SN", cell: "st-cell-sn" },                  // test st-cell-sn (global)
+            { pid: "partners", label: "SN", cell: "st-cell-sn" }, // test st-cell-sn (local)
+            { pid: "partners", id: "name", label: "Name" }
           ]
         },
-        { id: "remark", label: "Remark" },
         {
-          id: "items2",
+          label: "Commiters",
           children: [
-            { pid: "items2", id: "sn", label: "No." },
-            { pid: "items2", id: "name", label: "Name" }
+            { pid: "commiters", label: "SN", cell: "st-cell-sn" },
+            { pid: "commiters", id: "name", label: "Name" }
           ]
         }
       ],
       rows: [
-        { sn: 1, name: "Main 1", remark: "- | -" },
-        { sn: 2, name: "Main 2", items1: [], remark: "0 | -" },
+        { id: "bing", name: "Bing", website: "bing.com" },
+        { id: "google", name: "Google", website: "google.com", partners: [] },
         {
-          sn: 3,
-          name: "Main 3",
-          items1: [{ sn: 1, name: "A 3-1" }],
-          remark: "1 | -"
+          id: "baidu",
+          name: "BaiDu",
+          website: "baidu.com", 
+          partners: [{ name: "P 31" }]
         },
         {
           rowspan: 2,
-          sn: 4,
-          name: "Main 4",
-          items1: [{ sn: 1, name: "A 4-1" }],
-          remark: "1 | 2",
-          items2: [{ sn: 1, name: "B 4-1" }, { sn: 2, name: "B 4-2" }]
+          id: "so",
+          name: "360",
+          website: "www.so.com",
+          partners: [{ name: "P 41" }],
+          commiters: [{ name: "C 41" }, { name: "C 42" }]
         },
         {
           rowspan: 3,
-          sn: 5,
-          name: "Main 5",
-          items1: [
-            { sn: 1, name: "A 5-1" },
-            { sn: 2, name: "A 5-2" },
-            { sn: 3, name: "A 5-3" }
+          id: "doge",
+          name: "DogeDoge",
+          website: "dogedoge.com",
+          partners: [
+            { name: "P 51" },
+            { name: "P 52" },
+            { name: "P 53" }
           ],
-          remark: "3 | 2",
-          items2: [{ sn: 1, name: "B 5-1" }, { sn: 2, name: "B 5-2" }]
+          commiters: [{ name: "C 51" }, { name: "C 52" }]
         }
       ]
     };
