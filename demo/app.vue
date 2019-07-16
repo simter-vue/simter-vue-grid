@@ -13,7 +13,7 @@
         <input type="checkbox" v-model="customHeight" />
         Custom height:
       </label>
-      <input type="range" min="5" end="100" v-model="heightValue" />
+      <input type="range" min="7" end="100" v-model="heightValue" />
       {{heightValue}} {{unit}}
     </div>
     <st-grid
@@ -91,7 +91,6 @@ export default {
           partners: [{ name: "P 31" }]
         },
         {
-          rowspan: 2,
           id: "so",
           name: "360",
           website: "www.so.com",
@@ -99,7 +98,6 @@ export default {
           commiters: [{ name: "C 41" }, { name: "C 42" }]
         },
         {
-          rowspan: 3,
           id: "doge",
           name: "DogeDoge",
           website: "dogedoge.com",
