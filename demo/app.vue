@@ -20,15 +20,21 @@
       :style="{width: width, height: height, border: '1px solid #666'}"
       :columns="columns"
       :rows="rows"
-    ></st-grid>
+    >
+      <template #bottom>
+        <st-pagebar :page-no="pageNo" :page-size="pageSize" :total="total" @change="changePagebar"></st-pagebar>
+      </template>
+    </st-grid>
 
     <blockquote>Column 'Website' is auto width.</blockquote>
   </div>
 </template>
 
 <script>
-import grid from "../src/grid.vue";
+import stGrid from "../src/grid.vue";
+import stPagebar from "../src/pagebar/pagebar";
 export default {
+  components: { stGrid, stPagebar },
   data() {
     return {
       unit: "em",
@@ -36,6 +42,9 @@ export default {
       widthValue: 44,
       customHeight: true,
       heightValue: 15,
+      pageNo: 1,
+      pageSize: 25,
+      total: 101,
       columns: [
         { label: "SN", cell: "st-cell-sn", width: "2.5em" }, // test st-cell-sn (global)
         { label: "Index", cell: "st-cell-index", width: "4em" }, // test st-cell-index
@@ -109,9 +118,6 @@ export default {
       ]
     };
   },
-  components: {
-    "st-grid": grid
-  },
   computed: {
     width() {
       if (this.customWidth) return this.widthValue + this.unit;
@@ -120,6 +126,13 @@ export default {
     height() {
       if (this.customHeight) return this.heightValue + this.unit;
       else return "auto";
+    }
+  },
+  methods: {
+    changePagebar(type, pageNo, pageSize) {
+      console.log("type=%s, pageNo=%s, pageSize=%s", type, pageNo, pageSize);
+      this.pageNo = pageNo;
+      this.pageSize = pageSize;
     }
   }
 };
