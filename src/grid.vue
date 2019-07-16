@@ -115,4 +115,13 @@ export default {
   table-layout: fixed;
   border-collapse: collapse;
 }
+.st-grid td,
+.st-grid th {
+  padding: 0 0.4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.st-grid tr {
+  height: 2em;
+}
 </style>
