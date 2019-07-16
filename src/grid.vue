@@ -1,5 +1,8 @@
 <template>
   <div class="st-grid">
+    <div class="top" v-if="$slots.top && $slots.top.length > 0">
+      <slot name="top"></slot>
+    </div>
     <div class="header">
       <table
         border="1"
@@ -25,7 +28,9 @@
         </tbody>
       </table>
     </div>
-    <div class="footer">TODO: footer</div>
+    <div class="bottom" v-if="$slots.bottom && $slots.bottom.length > 0">
+      <slot name="bottom"></slot>
+    </div>
   </div>
 </template>
 
@@ -136,13 +141,17 @@ export default {
   table-layout: fixed;
   border-collapse: collapse;
 }
-.st-grid td,
-.st-grid th {
+.st-grid > .header > table > thead > tr > th,
+.st-grid > .content > table > tbody > tr > td {
   padding: 0 0.4em;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.st-grid tr {
+.st-grid > .header > table > thead > tr,
+.st-grid > .content > table > tbody > tr {
   height: 2em;
+}
+.st-grid > .bottom > * {
+  display: inline-block;
 }
 </style>
