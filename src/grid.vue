@@ -45,12 +45,18 @@ export default {
       default() {
         return [];
       }
-    },
-    lastColumnIsAutoWidth: { type: Boolean, required: false, default: false }
+    }
   },
   data: function() {
     return {
-      v: { scrollLeft: 0, scrollBarWidth: 0, timer: null, contentEl: null }
+      // some params use in ui
+      v: {
+        scrollLeft: 0,
+        scrollBarWidth: 0,
+        timer: null,
+        contentEl: null,
+        lastColumnIsAutoWidth: false
+      }
     };
   },
   computed: {
@@ -61,15 +67,32 @@ export default {
       return this.flattenColumns.filter(c => c.pid);
     }
   },
+  created() {
+    // 1.1. find pid from columns config
+    let pids = this.subColumns.map(c => c.pid);
+
+    // 2.2. auto set row.rowspan = max(row[pid].length) if row.rowspan not exists
+    this.rows.forEach(row => {
+      let maxSize = Math.max(
+        ...pids.map(pid => (row[pid] ? row[pid].length : 1))
+      );
+      if (maxSize > 1 && !row.hasOwnProperty("rowspan")) row.rowspan = maxSize;
+    });
+
+    // 2. auto judge the last column width config
+    this.v.lastColumnIsAutoWidth = !this.flattenColumns[
+      this.flattenColumns.length - 1
+    ].width;
+  },
   mounted() {
-    if (!this.lastColumnIsAutoWidth) {
+    if (!this.v.lastColumnIsAutoWidth) {
       // watch horizon scrollbar size
       this.v.contentEl = this.$el.querySelector(".content"); // cache content el
       this.$_watchHorizonScrollBarSize();
     }
   },
   destroyed() {
-    if (!this.lastColumnIsAutoWidth) clearInterval(this.v.timer);
+    if (!this.v.lastColumnIsAutoWidth) clearInterval(this.v.timer);
   },
   methods: {
     $_watchHorizonScrollBarSize() {
@@ -81,15 +104,13 @@ export default {
           this.v.scrollBarWidth = t;
         }
       }, 100);
-    },
-    scrollContent($event) {
-      this.v.scrollLeft = -1 * $event.target.scrollLeft;
     }
   }
 };
 </script>
 
 <style>
+/* default grid style */
 .st-grid {
   display: flex;
   flex-direction: column;
