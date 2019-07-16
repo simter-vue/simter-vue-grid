@@ -5,7 +5,7 @@
         <input type="checkbox" v-model="customWidth" />
         Custom width:
       </label>
-      <input type="range" min="5" end="100" v-model="widthValue" />
+      <input type="range" min="15" max="80" v-model="widthValue" />
       {{widthValue}} {{unit}}
     </div>
     <div>
@@ -13,7 +13,7 @@
         <input type="checkbox" v-model="customHeight" />
         Custom height:
       </label>
-      <input type="range" min="7" end="100" v-model="heightValue" />
+      <input type="range" min="10" max="30" v-model="heightValue" />
       {{heightValue}} {{unit}}
     </div>
     <st-grid
@@ -21,6 +21,8 @@
       :columns="columns"
       :rows="rows"
     ></st-grid>
+
+    <blockquote>Column 'Website' is auto width.</blockquote>
   </div>
 </template>
 
@@ -30,9 +32,9 @@ export default {
   data() {
     return {
       unit: "em",
-      customWidth: false,
-      widthValue: 35,
-      customHeight: false,
+      customWidth: true,
+      widthValue: 44,
+      customHeight: true,
       heightValue: 15,
       columns: [
         { label: "SN", cell: "st-cell-sn", width: "2.5em" }, // test st-cell-sn (global)
