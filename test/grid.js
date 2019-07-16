@@ -25,13 +25,16 @@ test('simplest grid', t => {
   // verify main container
   t.is(vm.$el.tagName, "DIV")
   const children = vm.$el.children
-  t.is(children.length, 2) // headerContainer and contentContainer
+  t.true(children.length > 1) // at least has headerEl and contentEl
+  t.is(vm.$el.getAttribute("class"), "st-grid")
 
-  // verify headerContainer
-  const headerContainer = children[0]
-  t.is(headerContainer.tagName, "DIV")
+  // verify headerEl
+  const headerEl = children[0]
+  t.is(headerEl.tagName, "DIV")
+  t.is(headerEl.getAttribute("class"), "header")
 
-  // verify contentContainer
-  const contentContainer = children[1]
-  t.is(contentContainer.tagName, "DIV")
+  // verify contentEl
+  const contentEl = children[1]
+  t.is(contentEl.tagName, "DIV")
+  t.is(contentEl.getAttribute("class"), "content")
 })
