@@ -28,15 +28,31 @@ $ yarn build
   <colgroup></colgroup>
   <!-- header -->
   <thead>
-    <tr><th rowspan=2>No.</th><th rowspan=2>Name</th><th colspan=2 style="text-align:center">Items</th></tr>
-    <tr><th>No.</th><th>Name</th></tr>
+    <tr>
+      <th rowspan=2>SN1</th>
+      <th rowspan=2>Repository</th>
+      <th colspan=3 style="text-align:center">Commiters</th>
+    </tr>
+    <tr><th>Team</th><th>SN2</th><th>User</th></tr>
   </thead>
   <!-- content -->
   <tbody>
-    <tr><td>1</td><td>Main 1</td><td></td><td></td></tr>
-    <tr><td rowspan=2>2</td><td rowspan=2>Main 2</td><td>1</td><td>Sub 2-1</td></tr>
-    <tr><td>2</td><td>Sub 2-2</td></tr>
-    <tr><td>3</td><td>Main 3</td><td>1</td><td>Sub 3-1</td></tr>
+    <tr><td>1</td><td>simter-vue-grid</td><td>Team A</td><td></td></tr>
+    <tr>
+      <td rowspan=2>2</td>
+      <td rowspan=2>simter-vue-thead</td>
+      <td rowspan=2>Team B</td>
+      <td>1</td>
+      <td>John</td>
+    </tr>
+    <tr><td>2</td><td>Rocky</td></tr>
+    <tr>
+      <td>3</td>
+      <td>simter-vue-colgroup</td>
+      <td>Team C</td>
+      <td>1</td>
+      <td>RJ</td>
+    </tr>
   </tbody>
 </table>
 
@@ -50,29 +66,34 @@ $ yarn build
 
 ```js
 columns = [
-  { id: "id", label: "Company Id"},
+  { label: "SN1", cell: "st-cell-sn"},
+  { id: "repository", label: "Repository"},
   { 
-    label: "Partners", 
+    label: "Commiters", 
     children: [
-      { id: "name", label: "Company Name"},
+      { id: "team", label: "Team"},
       // sub rows: pid represents this row is a sub row
-      { pid: "partners", id: "id", label: "Partner Id"},
-      { pid: "partners", id: "name", label: "Partner Name"}
+      { pid: "commiters", label: "SN2", cell: "st-cell-sn"},
+      { pid: "commiters", id: "user", label: "User"}
     ]
   }
 ]
 
 rows = [
-  { id: "google", name: "Google"},
+  { repository: "simter-vue-grid", team: "Team A"},
   { 
-    id: "bing", 
-    name: "Bing", 
-    partners: [
-      { id: "P1", name: "John"},
-      { id: "P2", name: "Future"},
+    repository: "simter-vue-thead", 
+    team: "Team B",
+    commiters: [
+      { user: "John"},
+      { user: "Rocky"},
     ] 
   },
-  { id: "baidu", name: "Baidu", partners: [{ id: "P3", name: "Music"}] }
+  { 
+    repository: "simter-vue-colgroup", 
+    team: "Team C", 
+    commiters: [{ user: "RJ"}]
+  }
 ]
 ```
 
