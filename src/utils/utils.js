@@ -1,3 +1,5 @@
+const g = window || global
+
 /**
  * Flatten all leaf object to simple object array.
  *
@@ -19,4 +21,18 @@ function flatten(columns) {
   );
 }
 
-export { flatten }
+/** Get global key's value */
+function get(key, defaultValue) {
+  if (g.hasOwnProperty(key)) return g[key]
+  let p = g, value
+  for (const k of key.split(".")) {
+    if (p.hasOwnProperty(k)) value = p = p[k]
+    else {
+      value = undefined
+      break
+    }
+  }
+  return typeof value === "undefined" ? defaultValue : value
+}
+
+export { g, get, flatten }
