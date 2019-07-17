@@ -35,4 +35,15 @@ function get(key, defaultValue) {
   return typeof value === "undefined" ? defaultValue : value
 }
 
+/** concat all class */
+function concatClasses(...classes) {
+  return classes.reduce((a, b) => {
+    if (typeof b === "undefined") return a
+    else {
+      a = a.concat(b)
+      return a
+    }
+  }, [])
+}
+
 export { g, get, flatten }

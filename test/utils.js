@@ -1,5 +1,5 @@
 import test from 'ava'
-import { g, get } from '../src/utils/utils'
+import { g, get, concatClasses } from '../src/utils/utils'
 
 test('get', t => {
   // undefined
@@ -20,4 +20,12 @@ test('get', t => {
 
   g.simter.k1 = { a: "v1a" }
   t.is(get("simter.k1.a"), "v1a")
+})
+
+test('concatClasses', t => {
+  t.deepEqual(concatClasses(), [])
+  t.deepEqual(concatClasses(undefined), [])
+  t.deepEqual(concatClasses(undefined, 1), [1])
+  t.deepEqual(concatClasses(1, 2), [1, 2])
+  t.deepEqual(concatClasses([1, 2], 3), [1, 2, 3])
 })
