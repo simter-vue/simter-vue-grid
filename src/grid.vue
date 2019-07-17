@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import flatten from "./utils/flatten";
+import { flatten } from "./utils/utils";
 import stRow from "./row/row";
 import stColgroup from "simter-vue-colgroup";
 import stThead from "simter-vue-thead";

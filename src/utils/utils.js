@@ -19,4 +19,4 @@ function flatten(columns) {
   );
 }
 
-export default flatten;
+export { flatten }
