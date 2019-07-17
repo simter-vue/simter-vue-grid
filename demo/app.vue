@@ -22,7 +22,9 @@
       :rows="rows"
     >
       <template #bottom>
+        <st-button @click.native="refresh">Refresh</st-button>
         <st-pagebar :page-no="pageNo" :page-size="pageSize" :total="total" @change="changePagebar"></st-pagebar>
+        <st-button-group :items="items" :active-item="activeItem" @change="changeItem"></st-button-group>
       </template>
     </st-grid>
 
@@ -32,9 +34,11 @@
 
 <script>
 import stGrid from "../src/grid.vue";
-import stPagebar from "../src/pagebar/pagebar";
+import stPagebar from "../src/pagebar/pagebar.vue";
+import stButton from "../src/button/button.vue";
+import stButtonGroup from "../src/button/button-group.vue";
 export default {
-  components: { stGrid, stPagebar },
+  components: { stGrid, stPagebar, stButton, stButtonGroup },
   data() {
     return {
       unit: "em",
@@ -45,6 +49,8 @@ export default {
       pageNo: 1,
       pageSize: 25,
       total: 101,
+      items: ["A", "B", "C"],
+      activeItem: "B",
       columns: [
         { label: "SN", cell: "st-cell-sn", width: "2.5em" }, // test st-cell-sn (global)
         { label: "Index", cell: "st-cell-index", width: "4em" }, // test st-cell-index
@@ -129,10 +135,16 @@ export default {
     }
   },
   methods: {
+    refresh() {
+      console.log("Refresh");
+    },
     changePagebar(type, pageNo, pageSize) {
-      console.log("type=%s, pageNo=%s, pageSize=%s", type, pageNo, pageSize);
+      console.log("changePagebar: type=%s, pageNo=%s, pageSize=%s", type, pageNo, pageSize);
       this.pageNo = pageNo;
       this.pageSize = pageSize;
+    },
+    changeItem(item, index) {
+      console.log("changeItem: index=%s, item=%s", index, item);
     }
   }
 };
