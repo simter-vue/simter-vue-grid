@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import { flatten } from "./utils/utils";
-import stRow from "./row/row";
+import { flatten } from "simter-vue-utils";
 import stColgroup from "simter-vue-colgroup";
 import stThead from "simter-vue-thead";
+import stRow from "./row/row";
 
 export default {
   components: { stColgroup, stThead, stRow },
@@ -115,7 +115,6 @@ export default {
 </script>
 
 <style>
-/* default grid style */
 .st-grid {
   display: flex;
   flex-direction: column;

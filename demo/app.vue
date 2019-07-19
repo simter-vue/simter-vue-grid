@@ -34,8 +34,8 @@
 
 <script>
 import stGrid from "../src/grid.vue";
-import stPagebar from "../src/pagebar/pagebar.vue";
-import stButton from "../src/button/button.vue";
+import stPagebar from "simter-vue-pagebar";
+import stButton from "simter-vue-button.vue";
 import stButtonGroup from "../src/button/button-group.vue";
 export default {
   components: { stGrid, stPagebar, stButton, stButtonGroup },

@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import stButton from "../button/button.vue";
+
 /**
  * 分页条组件
  * <pre>
@@ -36,6 +38,7 @@ const DEFAULT_PAGE_SIZES = window["SIMTER_PAGEBAR_DEFAULT_PAGE_SIZES"] || [
 ];
 
 export default {
+  components: { stButton },
   props: {
     /** The current 1-base page number */
     pageNo: { type: Number, required: false, default: 0 },

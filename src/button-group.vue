@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import { get, concatClasses } from "../utils/utils";
-import stButton from "../button/button.vue";
+import { get, concatClasses } from "simter-vue-utils";
+import stButton from "simter-vue-button";
 
 const DEFAULT_CLASSES = get("simter.buttonGroup.classes", {
   class: "st-button-group",
