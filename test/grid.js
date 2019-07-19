@@ -2,10 +2,9 @@ import test from 'ava'
 import Vue from 'vue'
 import Grid from '../src/grid.vue'
 
-function createGridInstance(data) {
+function createComponentInstance(propsData) {
   const Constructor = Vue.extend(Grid)
-  const vm = new Constructor({ propsData: data }).$mount()
-  return vm
+  return new Constructor({ propsData: propsData }).$mount()
 }
 
 test('simplest grid', t => {
@@ -20,7 +19,7 @@ test('simplest grid', t => {
   ]
 
   // create grid instance
-  const vm = createGridInstance({ columns, rows })
+  const vm = createComponentInstance({ columns, rows })
 
   // verify main container
   t.is(vm.$el.tagName, "DIV")
