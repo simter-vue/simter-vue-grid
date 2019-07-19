@@ -17,7 +17,7 @@ $ yarn start
 $ yarn build
 ```
 
-> Build to `'dest'` directory by [Rollup].
+> Build to `'dist'` directory by [Rollup].
 
 ## Significant Renderer Effection
 
